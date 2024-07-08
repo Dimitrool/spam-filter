@@ -1,49 +1,48 @@
-# spam filter for e-mails based on Supervised Learning and Naive Bayes Classification in Python 
+# Email Spam Filter Using Supervised Learning and Naive Bayes Classification
 
-This spam filter is based on supervised learning method, which means that before usage it is needed to give 
-it data, on which it will train and understand patterns, which occur in spam messages.
+This project is an email spam filter implemented in Python, utilizing supervised learning and Naive Bayes Classification to distinguish between spam and ham (non-spam) emails.
+
+## Overview
+
+This spam filter is based on a supervised learning method, meaning it requires training data to learn patterns and features that are typical of spam messages. Once trained, the filter can classify incoming emails as either spam or ham with a high degree of accuracy.
 
 ## Training
-To train spam filter I used large amount of e-mails together with a document called !truth.txt, 
-where for each e-mail (name of the file, where e-mail was stored) there was a label (OK / SPAM) 
-characterizing type of the e-mail. During the training stage spam filter maintains following data 
-structures:
-* two lists for ham and spam addresses
-* two list for ham and spam links
-* two dictionaries for words from ham and words from spam e-mails, where word is a key
-  and number of encounter of this word in an e-mail of particular type is a value
 
-Also, I had a predefined list of so-called "gray words", which are the words which could 
-not be useful in e-mail filtering. During the training stage, those words were ignored.
+### Dataset
+To train the spam filter, a large dataset of emails was used along with a document called `!truth.txt`. This document contains labels (OK/SPAM) for each email, indicating whether it is ham or spam.
 
-At the end of the training stage values of ham and spam maps will be recalculated to the probability of 
-encountering a particular word in spam or ham e-mail.
+### Data Structures
+During the training stage, the spam filter maintains the following data structures:
+- Two lists for email addresses (ham and spam).
+- Two lists for links found in emails (ham and spam).
+- Two dictionaries for words in ham and spam emails, where each word is a key and the value is the frequency of that word in the respective email type.
 
-## Practical usage and quality measurement 
-After training stage we have obtained all information needed to distinguish spam e-mails from useful. 
-Spam filter classifies the e-mail based on the first 1000 unique words. It seems like we are cutting off 
-useful information, but during testing of spam filter it was discovered that 1000 is enough to classsify 
-the e-mail. Moreover, it has increased performance of the algorithm, which is crucial in tasks
-where it is needed to classify large amount of e-mails.
-Before processing words of the e-mail, spam-filter checks, if it contains any links from ham and spam links 
-list. If yes then it gives the e-mail an appropriate classification. Same thing with senders.
-During actual testing of spam filter, it maintains two variables: ham_score and spam_score which are
-depicting the probability of e-mail being spam or ham. It is calculated using the Bayes’ Theorem. 
-At the end e-mail will be classified to the category with the highest probability score.
+A predefined list of "gray words" (common words that are not useful for filtering) is ignored during training.
 
-Also, it is possible to compute the quality of the spam filter using large amount of data using following
-formula:
-score = (tp + tn)/(tp + tn + 10*fp + fn), where
-tp - amount of messages that were correctly marked as ham
-tn - amount of messages that were correctly marked as spam
-fp - amount of messages that were wrongly marked as ham
-fn - amount of messages that were wrongly marked as spam
+### Probability Calculation
+At the end of the training stage, the word frequencies in the ham and spam dictionaries are converted into probabilities, representing the likelihood of encountering each word in ham or spam emails.
 
-This project was created as a last homework assigment for subject RPH (solving problems 
-and games) in CTU FEL OI.
-After submitting the project there was a competition between students' spam-filter. 
-This spam filter took 9/143 place with average quality score of 88%.
+## Usage and Performance
 
+### Classification
+After training, the spam filter can classify emails based on the first 1000 unique words. Although this might seem like it limits the information used, it has been shown to be sufficient for accurate classification and improves performance, which is crucial for processing large volumes of emails.
 
+Before processing the email's words, the spam filter checks if the email contains any links or addresses from the ham and spam lists. If a match is found, the email is classified accordingly.
+
+### Scoring
+During classification, two scores are maintained: `ham_score` and `spam_score`, which represent the probabilities of the email being ham or spam, respectively. These scores are calculated using Bayes’ Theorem. The email is classified based on the higher score.
+
+### Quality Measurement
+The quality of the spam filter can be evaluated using a large dataset and the following formula:
+score = (tp + tn) / (tp + tn + 10 * fp + fn)
+where:
+- `tp` (true positives) is the number of messages correctly identified as ham.
+- `tn` (true negatives) is the number of messages correctly identified as spam.
+- `fp` (false positives) is the number of messages incorrectly identified as ham.
+- `fn` (false negatives) is the number of messages incorrectly identified as spam.
+
+## Results
+
+This project was created as a final assignment for the course RPH (Solving Problems and Games) at CTU FEL OI. After submission, a competition was held among students' spam filters. This spam filter ranked 9th out of 143, achieving an average quality score of 88%.
 
 
