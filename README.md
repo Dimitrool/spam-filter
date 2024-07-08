@@ -43,6 +43,6 @@ where:
 
 ## Results
 
-This project was created as a final assignment for the course RPH (Solving Problems and Games) at CTU FEL OI. After submission, a competition was held among students' spam filters. This spam filter ranked 9th out of 143, achieving an average quality score of 88%.
+This project was created as a final assignment for the course RPH (Solving Problems and Games) at CTU FEL OI. After submission, a competition was held among students' spam filters. This spam filter ranked 9th out of 71, achieving an average quality score of 88%.
 
 
