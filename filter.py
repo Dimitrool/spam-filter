@@ -44,7 +44,7 @@ class MyFilter:
         # A word is a sequence of characters consisting of letters of the alphabet
         email = email.split("\n")
         for line in email:
-            line = line.split() # Gets a list of possible words in this line
+            line = line.split()  # Gets a list of possible words in this line
             if len(line) == 0:
                 continue
             # Check if we have an email address in this line
@@ -130,7 +130,7 @@ class MyFilter:
         return word
  
     def compute_word_evaluation(self):
-        # For each word from white words and black words computes the probability 
+        # For each word from ham words and spam words computes the probability
         # of encountering this word in SPAM or OK email
         # At the beginning in dictionaries ham_words and spam_words we stored 
         # data in format {word: number of encountering it in spam/ham emails}
